@@ -1,0 +1,428 @@
+use mydatabase
+switched to db mydatabase
+db.createCollection("users")
+{ ok: 1 }
+db.users.insertOne({name:"Thara"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('685a6328baa11da88ac49cf4')
+}
+db.users.insertOne({name: "Thara", age: 25, city: "Chennai"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('685a6357baa11da88ac49cf5')
+}
+db.users.insertMany([{name: "Ram", age: 28},{name:"Liya",age: 23}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('685a639bbaa11da88ac49cf6'),
+    '1': ObjectId('685a639bbaa11da88ac49cf7')
+  }
+}
+db.users.insertOne({name: "Priya", age: 3})
+{
+  acknowledged: true,
+  insertedId: ObjectId('685a63d3baa11da88ac49cf8')
+}
+db.users.find()
+{
+  _id: ObjectId('685a6328baa11da88ac49cf4'),
+  name: 'Thara'
+}
+{
+  _id: ObjectId('685a6357baa11da88ac49cf5'),
+  name: 'Thara',
+  age: 25,
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a639bbaa11da88ac49cf6'),
+  name: 'Ram',
+  age: 28
+}
+{
+  _id: ObjectId('685a639bbaa11da88ac49cf7'),
+  name: 'Liya',
+  age: 23
+}
+{
+  _id: ObjectId('685a63d3baa11da88ac49cf8'),
+  name: 'Priya',
+  age: 3
+}
+db.users.updateOne({ name: "Thara" },{ $set: { age: 26 } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.users.deleteOne({ name: "Ram" })
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.users.find({ age: { $gt: 24 } })
+{
+  _id: ObjectId('685a6328baa11da88ac49cf4'),
+  name: 'Thara',
+  age: 26
+}
+{
+  _id: ObjectId('685a6357baa11da88ac49cf5'),
+  name: 'Thara',
+  age: 25,
+  city: 'Chennai'
+}
+db.users.find({ age: { $lt: 30 } })
+{
+  _id: ObjectId('685a6328baa11da88ac49cf4'),
+  name: 'Thara',
+  age: 26
+}
+{
+  _id: ObjectId('685a6357baa11da88ac49cf5'),
+  name: 'Thara',
+  age: 25,
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a639bbaa11da88ac49cf7'),
+  name: 'Liya',
+  age: 23
+}
+{
+  _id: ObjectId('685a63d3baa11da88ac49cf8'),
+  name: 'Priya',
+  age: 3
+}
+db.users.find({ city: { $in: ["Chennai", "Delhi"] } })
+{
+  _id: ObjectId('685a6357baa11da88ac49cf5'),
+  name: 'Thara',
+  age: 25,
+  city: 'Chennai'
+}
+db.users.find().sort({ age: 1 })
+{
+  _id: ObjectId('685a63d3baa11da88ac49cf8'),
+  name: 'Priya',
+  age: 3
+}
+{
+  _id: ObjectId('685a639bbaa11da88ac49cf7'),
+  name: 'Liya',
+  age: 23
+}
+{
+  _id: ObjectId('685a6357baa11da88ac49cf5'),
+  name: 'Thara',
+  age: 25,
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a6328baa11da88ac49cf4'),
+  name: 'Thara',
+  age: 26
+}
+db.users.find().sort({ age: -1 })
+{
+  _id: ObjectId('685a6328baa11da88ac49cf4'),
+  name: 'Thara',
+  age: 26
+}
+{
+  _id: ObjectId('685a6357baa11da88ac49cf5'),
+  name: 'Thara',
+  age: 25,
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a639bbaa11da88ac49cf7'),
+  name: 'Liya',
+  age: 23
+}
+{
+  _id: ObjectId('685a63d3baa11da88ac49cf8'),
+  name: 'Priya',
+  age: 3
+}
+use myCollege
+switched to db myCollege
+db.createCollection("students")
+{ ok: 1 }
+db.students.insertOne({ name: "Anu", age: 20, department: "CSE", city: "Chennai" })
+{
+  acknowledged: true,
+  insertedId: ObjectId('685a65a2baa11da88ac49cf9')
+}
+db.students.insertMany([
+  { name: "Bala", age: 21, department: "ECE", city: "Delhi" },
+  { name: "Divya", age: 22, department: "EEE", city: "Mumbai" },
+  { name: "Sara", age: 20, department: "CSE", city: "Coimbatore" },
+  { name: "Ram", age: 23, department: "IT", city: "Chennai" }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('685a65a7baa11da88ac49cfa'),
+    '1': ObjectId('685a65a7baa11da88ac49cfb'),
+    '2': ObjectId('685a65a7baa11da88ac49cfc'),
+    '3': ObjectId('685a65a7baa11da88ac49cfd')
+  }
+}
+db.students.find()
+{
+  _id: ObjectId('685a65a2baa11da88ac49cf9'),
+  name: 'Anu',
+  age: 20,
+  department: 'CSE',
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfb'),
+  name: 'Divya',
+  age: 22,
+  department: 'EEE',
+  city: 'Mumbai'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfc'),
+  name: 'Sara',
+  age: 20,
+  department: 'CSE',
+  city: 'Coimbatore'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfd'),
+  name: 'Ram',
+  age: 23,
+  department: 'IT',
+  city: 'Chennai'
+}
+db.students.find({ department: "CSE" })
+{
+  _id: ObjectId('685a65a2baa11da88ac49cf9'),
+  name: 'Anu',
+  age: 20,
+  department: 'CSE',
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfc'),
+  name: 'Sara',
+  age: 20,
+  department: 'CSE',
+  city: 'Coimbatore'
+}
+db.students.find({ age: { $gt: 20 } })
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfb'),
+  name: 'Divya',
+  age: 22,
+  department: 'EEE',
+  city: 'Mumbai'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfd'),
+  name: 'Ram',
+  age: 23,
+  department: 'IT',
+  city: 'Chennai'
+}
+db.students.find({ city: { $in: ["Chennai", "Delhi"] } })
+{
+  _id: ObjectId('685a65a2baa11da88ac49cf9'),
+  name: 'Anu',
+  age: 20,
+  department: 'CSE',
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfd'),
+  name: 'Ram',
+  age: 23,
+  department: 'IT',
+  city: 'Chennai'
+}
+db.students.updateOne({ name: "Ram" }, { $set: { department: "AIML" } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.students.updateOne({ name: "Anu" }, { $set: { email: "anu@example.com" } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.students.deleteOne({ name: "Divya" })
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.students.find({ age: { $lt: 23 } })
+{
+  _id: ObjectId('685a65a2baa11da88ac49cf9'),
+  name: 'Anu',
+  age: 20,
+  department: 'CSE',
+  city: 'Chennai',
+  email: 'anu@example.com'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfc'),
+  name: 'Sara',
+  age: 20,
+  department: 'CSE',
+  city: 'Coimbatore'
+}
+db.students.find({ department: { $in: ["ECE", "IT"] } })
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+db.students.find().limit(2)
+{
+  _id: ObjectId('685a65a2baa11da88ac49cf9'),
+  name: 'Anu',
+  age: 20,
+  department: 'CSE',
+  city: 'Chennai',
+  email: 'anu@example.com'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+db.students.find().sort({ age: 1 })
+{
+  _id: ObjectId('685a65a2baa11da88ac49cf9'),
+  name: 'Anu',
+  age: 20,
+  department: 'CSE',
+  city: 'Chennai',
+  email: 'anu@example.com'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfc'),
+  name: 'Sara',
+  age: 20,
+  department: 'CSE',
+  city: 'Coimbatore'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfd'),
+  name: 'Ram',
+  age: 23,
+  department: 'AIML',
+  city: 'Chennai'
+}
+db.students.find().sort({ age: -1 })
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfd'),
+  name: 'Ram',
+  age: 23,
+  department: 'AIML',
+  city: 'Chennai'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfa'),
+  name: 'Bala',
+  age: 21,
+  department: 'ECE',
+  city: 'Delhi'
+}
+{
+  _id: ObjectId('685a65a2baa11da88ac49cf9'),
+  name: 'Anu',
+  age: 20,
+  department: 'CSE',
+  city: 'Chennai',
+  email: 'anu@example.com'
+}
+{
+  _id: ObjectId('685a65a7baa11da88ac49cfc'),
+  name: 'Sara',
+  age: 20,
+  department: 'CSE',
+  city: 'Coimbatore'
+}
+db.toys.aggregate([
+  { 
+    $group: { 
+      _id: "$type", 
+      totalPrice: { $sum: "$price" } 
+    } 
+  }
+])
+[
+  { "type": "car", "brand": "HotWheels", "price": 10 },
+  { "type": "car", "brand": "Matchbox", "price": 12 },
+  { "type": "doll", "brand": "Barbie", "price": 20 },
+  { "type": "car", "brand": "HotWheels", "price": 15 },
+  { "type": "doll", "brand": "Frozen", "price": 25 }
+]
+[
+  { type: 'car', brand: 'HotWheels', price: 10 },
+  { type: 'car', brand: 'Matchbox', price: 12 },
+  { type: 'doll', brand: 'Barbie', price: 20 },
+  { type: 'car', brand: 'HotWheels', price: 15 },
+  { type: 'doll', brand: 'Frozen', price: 25 }
+]
+db.toys.aggregate([
+  { 
+    $group: { 
+      _id: "$type", 
+      totalPrice: { $sum: "$price" } 
+    } 
+  }
+])
